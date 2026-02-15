@@ -48,6 +48,12 @@ def get_trained_models(_X_train, _y_train):
 
 # --- MAIN APP UI ---
 st.title("Machine Learning Classification App")
+
+# --- STUDENT DETAILS ADDED HERE ---
+st.markdown("### ML Assignment 2")
+st.markdown("**Manan Kumar Garg | 2025AA05493**")
+st.markdown("---")
+
 st.write("**Dataset:** UCI Spambase (4,601 instances, 57 features)")
 
 X, y = load_data()
