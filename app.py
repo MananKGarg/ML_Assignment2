@@ -126,4 +126,8 @@ with col_cm:
 with col_cr:
     st.write("### Classification Report")
     report = classification_report(y_test, y_pred, output_dict=True, zero_division=0)
-    st.dataframe(pd.DataFrame(report).transpose().round(4))
+    
+    # Fix the table error by dropping the 'accuracy' row before displaying
+    report_df = pd.DataFrame(report).transpose().round(4)
+    report_df = report_df.drop('accuracy', errors='ignore')
+    st.dataframe(report_df)
