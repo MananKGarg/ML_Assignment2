@@ -87,7 +87,7 @@ y_pred = selected_model.predict(X_test_scaled)
 y_prob = selected_model.predict_proba(X_test_scaled)[:, 1]
 
 # --- ALL MODELS COMPARISON TABLE ---
-st.subheader("Comparison Table (For README Markdown / PDF)")
+st.subheader("Comparison Table)")
 results = []
 for name, m in models.items():
     p = m.predict(X_test_scaled)
