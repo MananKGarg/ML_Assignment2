@@ -51,7 +51,7 @@ st.title("Machine Learning Classification App")
 
 # --- STUDENT DETAILS ADDED HERE ---
 st.markdown("### ML Assignment 2")
-st.markdown("**Manan Kumar Garg | 2025AA05493**")
+st.markdown("**Manan Kumar Garg   |   2025AA05493**")
 st.markdown("---")
 
 st.write("**Dataset:** UCI Spambase (4,601 instances, 57 features)")
