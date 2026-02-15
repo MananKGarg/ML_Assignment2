@@ -13,24 +13,22 @@ The objective of this project is to build an end-to-end machine learning pipelin
 
 **c. Models used:**
 
-*(Note to evaluator: The metrics below were calculated using a standard scaler and an 80/20 train-test split)*
-
 | ML Model Name | Accuracy | AUC | Precision | Recall | F1 | MCC |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Logistic Regression** | 0.9251 | 0.9712 | 0.9310 | 0.9150 | 0.9229 | 0.8462 |
-| **Decision Tree** | 0.8914 | 0.8901 | 0.8842 | 0.8905 | 0.8873 | 0.7761 |
-| **kNN** | 0.9023 | 0.9455 | 0.9015 | 0.8850 | 0.8931 | 0.7984 |
-| **Naive Bayes** | 0.8230 | 0.9410 | 0.7350 | 0.9510 | 0.8291 | 0.6715 |
-| **Random Forest (Ensemble)** | 0.9566 | 0.9875 | 0.9650 | 0.9450 | 0.9548 | 0.9102 |
-| **XGBoost (Ensemble)** | 0.9610 | 0.9890 | 0.9680 | 0.9520 | 0.9599 | 0.9185 |
+| **Logistic Regression** | 0.9197 | 0.9713 | 0.9317 | 0.8744 | 0.9021 | 0.8353 |
+| **Decision Tree** | 0.9197 | 0.9189 | 0.9202 | 0.8872 | 0.9034 | 0.8351 |
+| **kNN** | 0.8936 | 0.9452 | 0.8989 | 0.8436 | 0.8704 | 0.7814 |
+| **Naive Bayes** | 0.8219 | 0.9263 | 0.7233 | 0.9385 | 0.8170 | 0.6701 |
+| **Random Forest (Ensemble)** | 0.9555 | 0.9852 | 0.9755 | 0.9179 | 0.9458 | 0.9093 |
+| **XGBoost (Ensemble)** | 0.9566 | 0.9883 | 0.9730 | 0.9231 | 0.9474 | 0.9114 |
 
 **Observations on Model Performance:**
 
 | ML Model Name | Observation about model performance |
 | :--- | :--- |
-| **Logistic Regression** | Performed strongly as a baseline. Since word frequency data often has linear decision boundaries, it achieved good accuracy and high precision, though it struggled slightly with more complex feature interactions compared to the tree-based ensembles. |
-| **Decision Tree** | Showed the lowest AUC among the models. While it captured non-linear relationships, it likely suffered from slight overfitting given the 57 features and continuous nature of the data, leading to a drop in generalization on the test set. |
-| **KNN** | Performed decently but required strict standard scaling. Because KNN relies on distance metrics, the high dimensionality (57 features) makes it susceptible to the "curse of dimensionality," slightly hindering its recall for spam detection. |
-| **Naive Bayes** | Yielded the highest recall but the lowest precision. The Gaussian Naive Bayes assumption that all features (word frequencies) are independent is heavily violated in text data, causing it to over-predict the positive class (many false positives). |
-| **Random Forest (Ensemble)** | Showed excellent overall performance. By building multiple trees and using feature randomness, it successfully handled the 57 dimensions and completely mitigated the overfitting seen in the standalone Decision Tree. |
-| **XGBoost (Ensemble)** | Achieved the highest accuracy, F1, and MCC scores. Its sequential boosting mechanism effectively minimized errors from previous trees, handling the sparse frequency features exceptionally well and making it the most robust model for this dataset. |
+| **Logistic Regression** | Performed strongly as a baseline, tying with the Decision Tree for accuracy (0.9197) but achieving a significantly higher AUC (0.9713 vs 0.9189). This indicates it separates the spam/non-spam probabilities better overall, though its recall is slightly lacking. |
+| **Decision Tree** | Achieved identical accuracy to Logistic Regression but with a better F1 score (0.9034). However, it yielded the lowest AUC of all models (0.9189), suggesting it made hard splits that didn't scale well probabilistically across the test data. |
+| **KNN** | Performed adequately (0.8936 accuracy) but was the second-lowest overall. The high dimensionality of the Spambase dataset (57 features) likely triggered the "curse of dimensionality," making distance-based calculations less effective. |
+| **Naive Bayes** | Yielded the lowest overall accuracy, precision, F1, and MCC. Interestingly, it had the highest recall of any model (0.9385). It aggressively classified emails as spam, catching almost all of them, but made a massive amount of false-positive mistakes along the way. |
+| **Random Forest (Ensemble)** | An excellent performer with 0.9555 accuracy. It achieved the highest precision of all models (0.9755), meaning when it flags an email as spam, it is almost certainly correct, minimizing annoying false positives for users. |
+| **XGBoost (Ensemble)** | The absolute best-performing model across almost all metrics, leading in Accuracy (0.9566), AUC (0.9883), F1 (0.9474), and MCC (0.9114). Its sequential boosting handled the continuous frequency features exceptionally well, proving to be the most robust choice. |
